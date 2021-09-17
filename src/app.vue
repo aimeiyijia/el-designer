@@ -3,31 +3,35 @@
     <el-container>
       <el-header>Header</el-header>
       <el-container>
-        <el-aside width="300px">
+        <el-aside width="310px" class="draggable-container">
           <!-- efd: el-form-designer -->
           <div v-for="element in DraggableItems" :key="element.id">
-            {{ element.name }}
+            <div class="group-name">{{ element.groupName }}</div>
             <draggable
               class="efd-draggable"
               v-model="DraggableItems"
-              :options="{
-                group: {name: 'ElFormDesigner', pull: 'clone', put: false},
-                sort: false
-              }"
+              :group="{name: 'ElFormDesigner', pull: 'clone', put: false}"
+              :sort="false"
+              ghostClass="ghostClass"
+              dragClass="dragClass"
               chosenClass="chosen"
               forceFallback="true"
-              animation="1000"
+              animation="800"
               @start="onStart"
               @end="onEnd"
             >
               <transition-group>
                 <div
-                  class="item"
+                  class="draggable-item"
                   v-for="draggableEl in element.childs"
                   :key="draggableEl.id"
                 >
-                  <svg-icon name="input"></svg-icon>
-                  {{ draggableEl.name }}
+                  <svg-icon
+                    :name="draggableEl.icon"
+                    width="24"
+                    height="24"
+                  ></svg-icon>
+                  <div>{{ draggableEl.name }}</div>
                 </div>
               </transition-group>
             </draggable>
@@ -66,6 +70,7 @@ html,
 body,
 #app {
   height: 100%;
+  cursor: pointer;
 }
 .el-container {
   height: 100%;
@@ -80,7 +85,46 @@ body,
 .el-main {
   background-color: #e9eef3;
 }
-.el-footer {
-  height: 32px;
+.svg-icon {
+  fill: currentColor;
+}
+</style>
+<style lang="scss" scoped>
+.draggable-container {
+  font-size: 12px;
+  padding-left: 8px;
+  .group-name {
+    font-size: 16px;
+    padding-top: 6px;
+  }
+  .draggable-item {
+    display: inline-block;
+    text-align: center;
+    margin: 4px 2px;
+    width: 28.5%;
+    border-radius: 2px;
+    padding: 12px 4px;
+    // transition: all 0.2s;
+
+    .svg-icon {
+      margin-bottom: 2px;
+    }
+
+    &:hover {
+      color: #fff;
+      background-color: #409eff;
+      transition: all 0.2s;
+    }
+    &.dragClass {
+      color: #fff;
+      background-color: #409eff;
+    }
+    &.ghostClass {
+      color: #fff;
+      background-color: #409eff;
+      margin: 4px 6px;
+      padding: 12px 0;
+    }
+  }
 }
 </style>
