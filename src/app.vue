@@ -26,6 +26,7 @@
                   v-for="draggableEl in element.childs"
                   :key="draggableEl.id"
                 >
+                  <svg-icon name="input"></svg-icon>
                   {{ draggableEl.name }}
                 </div>
               </transition-group>

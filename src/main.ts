@@ -7,9 +7,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 import SvgIcon from 'vue-svgicon'
 
-
-
 import App from './app.vue'
+
+import '@/icons/components'
 
 Vue.use(ElementUI)
 
