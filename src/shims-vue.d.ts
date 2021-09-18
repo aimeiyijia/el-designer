@@ -8,3 +8,5 @@ declare module '*.gif' {
 }
 
 declare module '*.js'
+
+declare module 'el-form-plus'

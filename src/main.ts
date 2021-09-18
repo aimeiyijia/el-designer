@@ -11,7 +11,13 @@ import App from './app.vue'
 
 import '@/icons/components'
 
+import ElFormPlus from 'el-form-plus'
+import ElDraggable from './components/ElDraggable.vue'
+
 Vue.use(ElementUI)
+Vue.use(ElFormPlus, {
+  ElDraggable
+})
 
 Vue.use(SvgIcon, {
   tagName: 'svg-icon',
