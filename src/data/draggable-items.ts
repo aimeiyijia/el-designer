@@ -1,5 +1,23 @@
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid'
 const DraggableItems = [
+  {
+    groupName: '布局',
+    id: uuidv4(),
+    childs: [
+      {
+        id: uuidv4(),
+        type: 'ElRow',
+        name: 'Row行',
+        icon: 'row',
+      },
+      {
+        id: uuidv4(),
+        type: 'ElCol',
+        name: 'Col列',
+        icon: 'col',
+      },
+    ],
+  },
   {
     groupName: '表单：',
     id: uuidv4(),
