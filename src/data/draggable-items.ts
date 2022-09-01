@@ -37,6 +37,8 @@ const DraggableItems = [
       {
         id: uuidv4(),
         type: 'Input',
+        field: 'input123',
+        value: 'input',
         name: '输入框',
         icon: 'input',
       },

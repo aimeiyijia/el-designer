@@ -16,7 +16,7 @@ import ElDraggable from './components/ElDraggable.vue'
 
 Vue.use(ElementUI)
 Vue.use(ElFormPlus, {
-  ElDraggable
+  components: { ElDraggable }
 })
 
 Vue.use(SvgIcon, {

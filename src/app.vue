@@ -9,6 +9,7 @@
             <div class="group-name">{{ element.groupName }}</div>
             <draggable
               class="efd-draggable"
+              v-model="element.childs"
               :group="{name: 'ElFormDesigner', pull: 'clone', put: false}"
               :sort="false"
               ghostClass="ghostClass"
@@ -17,7 +18,6 @@
               forceFallback="true"
               animation="800"
               @start="onStart"
-              @end="onEnd"
             >
               <transition-group>
                 <div
@@ -37,16 +37,12 @@
           </div>
         </el-aside>
         <el-main>
-          <!-- <draggable
-            class="efd-draggable"
-            v-model="arr2"
-            group="ElFormDesigner"
-            animation="100"
-            @clone="clone"
-          >
-
-          </draggable> -->
-          <el-form-plus v-model="model" :options="options"></el-form-plus>
+          <el-form-plus
+            v-model="model"
+            :options="options"
+            :config="config"
+            @node-change="handleNodeChange"
+          ></el-form-plus>
         </el-main>
         <el-aside width="400px">Aside</el-aside>
       </el-container>
@@ -58,6 +54,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import draggable from 'vuedraggable'
+import ElDraggable from './components/ElDraggable.vue'
 import DraggableItems from './data/draggable-items'
 
 @Component({
@@ -71,6 +68,8 @@ export default class extends Vue {
   // 定义要被拖拽对象的数组
   private DraggableItems = DraggableItems
 
+  arr = []
+
   // private arr2 = [
   //   {
   //     id: 1,
@@ -80,39 +79,37 @@ export default class extends Vue {
   //   },
   // ]
 
+  private config = {
+    buttonsConfig: false,
+    // container: (instance: Vue) => {
+    //   const h = instance.$createElement
+    //   console.log(ElDraggable)
+    //   console.log(h(ElDraggable))
+    //   return h(ElDraggable)
+    // }
+    container: 'ElDraggable',
+  }
+
   private model = { input: 1 }
   private options = [
-    {
-      type: 'Input',
-      field: 'input',
-      value: 'input初始值',
-      config: {
-        container: () => {
-          return 'ElDraggable'
-        },
-      },
-    },
-    {
-      type: 'Input',
-      field: 'input1',
-      value: 'input初始值1',
-      config: {
-        container: () => {
-          return 'ElDraggable'
-        },
-      },
-    },
+    // {
+    //   type: 'Input',
+    //   field: 'input',
+    //   value: 'input初始值',
+    // },
+    // {
+    //   type: 'Input',
+    //   field: 'input1',
+    //   value: 'input初始值1',
+    // },
   ]
 
-  onStart() {}
-  onEnd(el) {
-    console.log(DraggableItems, '数据')
-    console.log(el, '结束')
+  handleNodeChange(arr) {
+    this.options = arr
+    console.log('变化外部', arr)
   }
 
-  clone() {
-    console.log(this, '克隆')
-  }
+  onStart() {}
 }
 </script>
 <style lang="scss">
