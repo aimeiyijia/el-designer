@@ -1,10 +1,9 @@
 <template>
   <draggable
-    tag="el-form"
-    class="ElFormDesigner"
-    v-model="arr"
+    class="el-form-draggable"
+    v-model="els"
     group="ElFormDesigner"
-    animation="400"
+    animation="200"
     @change="change"
   >
     <slot></slot>
@@ -22,16 +21,7 @@ import draggable from 'vuedraggable'
   },
 })
 export default class extends Vue {
-  arr = [
-    {
-      icon: 'cascader',
-      field: 'input890',
-      value: 'hdhdh',
-      id: '5d2d88f1-b84c-4efc-915a-1a2b4ef8265f',
-      name: '级联选择器',
-      type: 'Input',
-    },
-  ]
+  els = []
 
   findElFormComponent(instance: Vue): any {
     const componentName = 'ElForm'
@@ -51,18 +41,17 @@ export default class extends Vue {
     return false
   }
 
-  change(val) {
-    console.log(this.arr, '变化')
+  change() {
     const elForm = this.findElFormComponent(this)
     if (elForm) {
-      console.log(elForm, '父')
-      elForm.$emit('node-change', this.arr)
+      elForm.$emit('node-change', this.els)
     }
-    // console.log(this.arr)
-    // console.log(val, '变化')
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.el-form-draggable {
+  height: 100%;
+}
 </style>

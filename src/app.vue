@@ -16,7 +16,7 @@
               dragClass="dragClass"
               chosenClass="chosen"
               forceFallback="true"
-              animation="800"
+              animation="200"
               @start="onStart"
             >
               <transition-group>
@@ -30,7 +30,7 @@
                     width="24"
                     height="24"
                   ></svg-icon>
-                  <div>{{ draggableEl.name }}</div>
+                  <div>{{ draggableEl.label }}</div>
                 </div>
               </transition-group>
             </draggable>
@@ -68,43 +68,16 @@ export default class extends Vue {
   // 定义要被拖拽对象的数组
   private DraggableItems = DraggableItems
 
-  arr = []
-
-  // private arr2 = [
-  //   {
-  //     id: 1,
-  //     type: 'ElCol',
-  //     name: 'Col列',
-  //     icon: 'col',
-  //   },
-  // ]
-
   private config = {
+    labelWidth: '80px',
     buttonsConfig: false,
-    // container: (instance: Vue) => {
-    //   const h = instance.$createElement
-    //   console.log(ElDraggable)
-    //   console.log(h(ElDraggable))
-    //   return h(ElDraggable)
-    // }
     container: 'ElDraggable',
   }
 
   private model = { input: 1 }
-  private options = [
-    // {
-    //   type: 'Input',
-    //   field: 'input',
-    //   value: 'input初始值',
-    // },
-    // {
-    //   type: 'Input',
-    //   field: 'input1',
-    //   value: 'input初始值1',
-    // },
-  ]
+  private options = []
 
-  handleNodeChange(arr) {
+  handleNodeChange(arr: any) {
     this.options = arr
     console.log('变化外部', arr)
   }
@@ -121,6 +94,9 @@ body,
 }
 .el-container {
   height: 100%;
+  .el-container {
+    height: calc(100% - 92px);
+  }
 }
 .el-header,
 .el-footer {
@@ -128,6 +104,9 @@ body,
 }
 .el-main {
   background-color: #e9eef3;
+  .el-form {
+    height: 100%;
+  }
 }
 .svg-icon {
   fill: currentColor;
