@@ -4,7 +4,6 @@
       <el-header>Header</el-header>
       <el-container>
         <el-aside width="310px" class="draggable-container">
-          <!-- efd: el-form-designer -->
           <div v-for="element in DraggableItems" :key="element.id">
             <div class="group-name">{{ element.groupName }}</div>
             <draggable
@@ -38,7 +37,6 @@
         </el-aside>
         <el-main>
           <el-form-plus
-            v-model="model"
             :options="options"
             :config="config"
             @node-change="handleNodeChange"
@@ -54,8 +52,8 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import draggable from 'vuedraggable'
-import ElDraggable from './components/ElDraggable.vue'
 import DraggableItems from './data/draggable-items'
+import formItemData from '../mock'
 
 @Component({
   name: 'App',
@@ -74,8 +72,7 @@ export default class extends Vue {
     container: 'ElDraggable',
   }
 
-  private model = { input: 1 }
-  private options = []
+  private options = Object.values(formItemData)
 
   handleNodeChange(arr: any) {
     this.options = arr
@@ -104,8 +101,12 @@ body,
 }
 .el-main {
   background-color: #e9eef3;
+  height: 100%;
+  overflow: hidden;
+  padding: 0;
   .el-form {
     height: 100%;
+    overflow: hidden;
   }
 }
 .svg-icon {
