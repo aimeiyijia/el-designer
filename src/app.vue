@@ -69,8 +69,8 @@ export default class extends Vue {
   private DraggableItems = DraggableItems
 
   private config = {
-    labelWidth: '80px',
-    buttonsConfig: false,
+    labelWidth: '120px',
+    buttonsConfig: true,
     container: 'ElDraggable',
   }
 
